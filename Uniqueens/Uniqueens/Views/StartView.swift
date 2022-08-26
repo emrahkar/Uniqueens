@@ -9,7 +9,6 @@ import SwiftUI
 
 struct StartView: View {
     
-    
     @State var enter_status: Bool = false
 
     var body: some View {
@@ -20,13 +19,12 @@ struct StartView: View {
                         .frame(maxWidth: .infinity)
                         .frame(height: 500)
         
-                    
                     Button {
                         enter_status.toggle()
                     } label: {
                         Text("Enter")
                             .font(.title3)
-                            .foregroundColor(Color("CustomWhite"))
+                            .foregroundColor(Color.MyTheme.customWhite)
                             .bold()
 
                     }
@@ -37,25 +35,19 @@ struct StartView: View {
                    
                 }
                 .frame(maxWidth: .infinity, maxHeight: .infinity)
-                .background(Color("CustomPink"))
+                .background(Color.MyTheme.customPink)
                 .overlay {
                     if enter_status {
                         withAnimation(.default) {
-                            HomeView()
+                            MainView()
                         }
-                        
                     }
                 }
-               
-    }
-    
+            }
 }
 
 struct StartView_Previews: PreviewProvider {
     static var previews: some View {
-  
             StartView()
-        
-        
     }
 }
