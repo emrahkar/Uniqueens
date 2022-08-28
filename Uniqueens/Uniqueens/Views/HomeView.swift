@@ -9,7 +9,7 @@ import SwiftUI
 
 struct HomeView: View {
     
-    @StateObject var vm: ProductViewModel = ProductViewModel()
+    @EnvironmentObject var vm: ProductViewModel
     
     let columns = [
         GridItem(.adaptive(minimum: 180))
@@ -68,6 +68,7 @@ struct HomeView: View {
 struct HomeView_Previews: PreviewProvider {
     static var previews: some View {
         HomeView()
+            .environmentObject(ProductViewModel())
         
         
     }

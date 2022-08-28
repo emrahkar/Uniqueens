@@ -11,17 +11,16 @@ struct Product: Identifiable, Hashable {
     
     var id = UUID().uuidString
     var name: String
-    var price: String
+    var price: Double
     var productCode: String
     var availability: String
     var exTaxPrice: String
-    var quantity: Int = 1
+    var quantity: Int 
     var productType: ProductType
     var imageName: String = ""
     var description: String = ""
     var rating: Int
     var isOnSale: Bool
-    
 }
 
 

@@ -16,10 +16,12 @@
 		BF40ECC828B772DB0092F308 /* Product.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF40ECC728B772DB0092F308 /* Product.swift */; };
 		BF40ECCA28B775B70092F308 /* HomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF40ECC928B775B70092F308 /* HomeView.swift */; };
 		BF40ECCC28B796DC0092F308 /* ProductView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF40ECCB28B796DC0092F308 /* ProductView.swift */; };
+		BF86FD3028BA408C005D7114 /* FavoritesListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF86FD2F28BA408C005D7114 /* FavoritesListView.swift */; };
 		BF9E279128B1321300856DEA /* Launch Screen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = BF9E279028B1321300856DEA /* Launch Screen.storyboard */; };
 		BFAB42D628B26E7800B64772 /* CarouselView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFAB42D528B26E7700B64772 /* CarouselView.swift */; };
 		BFB9E30428B53A7A00288B55 /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFB9E30328B53A7A00288B55 /* Extensions.swift */; };
 		BFC376F128B7DC7800BD413A /* ProductViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFC376F028B7DC7800BD413A /* ProductViewModel.swift */; };
+		BFDDF5E628BA471D0037DA19 /* FavoritesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFDDF5E528BA471D0037DA19 /* FavoritesView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -33,10 +35,12 @@
 		BF40ECC728B772DB0092F308 /* Product.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Product.swift; sourceTree = "<group>"; };
 		BF40ECC928B775B70092F308 /* HomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeView.swift; sourceTree = "<group>"; };
 		BF40ECCB28B796DC0092F308 /* ProductView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProductView.swift; sourceTree = "<group>"; };
+		BF86FD2F28BA408C005D7114 /* FavoritesListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoritesListView.swift; sourceTree = "<group>"; };
 		BF9E279028B1321300856DEA /* Launch Screen.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = "Launch Screen.storyboard"; sourceTree = "<group>"; };
 		BFAB42D528B26E7700B64772 /* CarouselView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CarouselView.swift; sourceTree = "<group>"; };
 		BFB9E30328B53A7A00288B55 /* Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Extensions.swift; sourceTree = "<group>"; };
 		BFC376F028B7DC7800BD413A /* ProductViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProductViewModel.swift; sourceTree = "<group>"; };
+		BFDDF5E528BA471D0037DA19 /* FavoritesView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoritesView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -96,6 +100,7 @@
 			children = (
 				BFAB42D528B26E7700B64772 /* CarouselView.swift */,
 				BF40ECCB28B796DC0092F308 /* ProductView.swift */,
+				BF86FD2F28BA408C005D7114 /* FavoritesListView.swift */,
 			);
 			path = SubViews;
 			sourceTree = "<group>";
@@ -106,6 +111,7 @@
 				BF0BB9E728B2735200C91118 /* MainView.swift */,
 				BF0BB9E928B2736000C91118 /* StartView.swift */,
 				BF40ECC928B775B70092F308 /* HomeView.swift */,
+				BFDDF5E528BA471D0037DA19 /* FavoritesView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -211,7 +217,9 @@
 				BF0BB9EA28B2736000C91118 /* StartView.swift in Sources */,
 				BFC376F128B7DC7800BD413A /* ProductViewModel.swift in Sources */,
 				BF0BB9E828B2735200C91118 /* MainView.swift in Sources */,
+				BF86FD3028BA408C005D7114 /* FavoritesListView.swift in Sources */,
 				BFAB42D628B26E7800B64772 /* CarouselView.swift in Sources */,
+				BFDDF5E628BA471D0037DA19 /* FavoritesView.swift in Sources */,
 				BF40ECCA28B775B70092F308 /* HomeView.swift in Sources */,
 				BF335E3828B1231700836303 /* UniqueensApp.swift in Sources */,
 				BF40ECC828B772DB0092F308 /* Product.swift in Sources */,

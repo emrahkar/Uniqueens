@@ -9,6 +9,7 @@ import SwiftUI
 
 struct MainView: View {
     
+    @StateObject var vm: ProductViewModel = ProductViewModel()
     @State var selectedTab: Tab = .home
     
     init() {
@@ -42,7 +43,7 @@ struct MainView: View {
                 
                 HomeView()
                     .tag(Tab.home)
-                Text("Favorites")
+                FavoritesView()
                     .tag(Tab.favorites)
                 Text("Profile")
                     .tag(Tab.profile)
@@ -85,6 +86,7 @@ struct MainView: View {
             .padding([.bottom, .horizontal])
             .padding(.bottom, 8)
         }
+        .environmentObject(vm)
         .background(Color.MyTheme.customPink)
         .ignoresSafeArea()
     }

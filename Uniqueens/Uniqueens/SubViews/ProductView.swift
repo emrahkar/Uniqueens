@@ -8,7 +8,11 @@
 import SwiftUI
 
 struct ProductView: View {
+    
+    @EnvironmentObject var vm: ProductViewModel
     var product: Product
+   
+   
     
     var body: some View {
         
@@ -42,7 +46,7 @@ struct ProductView: View {
                         .font(.footnote)
                         .bold()
                         .foregroundColor(Color.MyTheme.customGray)
-                    Text(product.price)
+                    Text(String(format:"%.2f",product.price) + "€")
                         .font(.body)
                         .foregroundColor(Color.MyTheme.customGray)
                         .bold()
@@ -63,6 +67,8 @@ struct ProductView: View {
             VStack(spacing: 2){
             
                 Button {
+                
+                    vm.addToCart(product: product)
                     
                 } label: {
                     
@@ -77,16 +83,20 @@ struct ProductView: View {
                 }
     
                 Button {
-                    
+                    if !vm.favoriteCart.contains(product){
+                        vm.addToFavorites(product: product)
+                    }
                 } label: {
     
                     VStack {
-                        Image(systemName: "heart")
-                            .padding()
-                            .frame(width: 35, height: 35)
-                            .foregroundColor(Color.MyTheme.customGray)
-                            .background(Color.MyTheme.customPink)
-                            .cornerRadius(25)
+                        
+                    Image(systemName: "heart")
+                        .padding()
+                        .frame(width: 35, height: 35)
+                        .foregroundColor(Color.MyTheme.customGray)
+                        .background(Color.MyTheme.customPink)
+                        .cornerRadius(25)
+                
                     }
                 }
                 
@@ -106,6 +116,7 @@ struct ProductView: View {
 
 struct ProductView_Previews: PreviewProvider {
     static var previews: some View {
-        ProductView(product: Product(name: "Daisy of the Fairy Earrings", price: "10.00€", productCode: "", availability: "", exTaxPrice: "", quantity: 1, productType: .earrings, imageName: "daisy", description: "", rating: 2, isOnSale: false))
+        ProductView(product: Product(name: "Daisy of the Fairy Earrings", price: 10.00, productCode: "", availability: "", exTaxPrice: "", quantity: 1, productType: .earrings, imageName: "daisy", description: "", rating: 2, isOnSale: false))
+                .environmentObject(ProductViewModel())
     }
 }
