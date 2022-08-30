@@ -34,9 +34,8 @@ struct FavoritesListView: View {
                             .foregroundColor(.red)
                             
                     }
-
-                    Spacer()
                 }
+                .padding()
                 .frame(width: 380, height: 75)
                 .foregroundColor(Color.MyTheme.customGray)
                 .background(Color.MyTheme.customWhite)

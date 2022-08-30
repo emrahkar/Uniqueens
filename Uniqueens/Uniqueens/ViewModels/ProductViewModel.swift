@@ -17,16 +17,14 @@ class ProductViewModel: ObservableObject {
     @Published var cartProducts: [Product] = []
     @Published var cartTotalAmount: Double = 0
     @Published var favoriteCart: [Product] = []
-    
- 
-
+    @Published var totalQuantity: Int = 0
     
     @Published var productList: [Product] = [
     
-        Product(name: "Daisy of the Fairy Earrings", price: 6.00, productCode: "", availability: "", exTaxPrice: "", quantity: 0, productType: .earrings, imageName: "daisy", description: "", rating: 5, isOnSale: false),
-        Product(name: "Daisy of the Fairy Earrings", price: 10.00, productCode: "", availability: "", exTaxPrice: "", quantity: 0, productType: .earrings, imageName: "margaret", description: "", rating: 4, isOnSale: false),
-        Product(name: "Daisy of the Fairy Earrings", price: 9.00, productCode: "", availability: "", exTaxPrice: "", quantity: 0, productType: .earrings, imageName: "pop", description: "", rating: 5, isOnSale: false),
-        Product(name: "Daisy of the Fairy Earrings", price: 10.00, productCode: "", availability: "", exTaxPrice: "", quantity: 0, productType: .earrings, imageName: "redelegance", description: "", rating: 3, isOnSale: false),
+        Product(name: "Daisy of the Fairy Earrings", price: 6.00, productCode: "", availability: "", exTaxPrice: "", quantity: 1, productType: .earrings, imageName: "daisy", description: "", rating: 5, isOnSale: false),
+        Product(name: "Daisy of the Fairy Earrings", price: 10.00, productCode: "", availability: "", exTaxPrice: "", quantity: 1, productType: .earrings, imageName: "margaret", description: "", rating: 4, isOnSale: false),
+        Product(name: "Daisy of the Fairy Earrings", price: 9.00, productCode: "", availability: "", exTaxPrice: "", quantity: 1, productType: .earrings, imageName: "pop", description: "", rating: 5, isOnSale: false),
+        Product(name: "Daisy of the Fairy Earrings", price: 10.00, productCode: "", availability: "", exTaxPrice: "", quantity: 1, productType: .earrings, imageName: "redelegance", description: "", rating: 3, isOnSale: false),
         Product(name: "Daisy of the Fairy Earrings", price: 3.00, productCode: "", availability: "", exTaxPrice: "", quantity: 0, productType: .earrings, imageName: "sound", description: "", rating: 3, isOnSale: false),
         
         Product(name: "Daisy of the Fairy Earrings", price: 6.00, productCode: "", availability: "", exTaxPrice: "", quantity: 0, productType: .bracelets, imageName: "allaboutbutt", description: "", rating: 4, isOnSale: false),
@@ -84,18 +82,27 @@ class ProductViewModel: ObservableObject {
     
     
     func addToCart(product: Product) {
-        DispatchQueue.main.async {
-            self.cartProducts.append(product)
+        
+        if !self.cartProducts.contains(product) {
+
+            DispatchQueue.main.async {
+                self.cartProducts.append(product)
+            }
+            
+            totalQuantity += 1
+            cartTotalAmount += product.price
         }
-        cartTotalAmount += (product.price * Double(product.quantity))
     }
     
     
-    func removeFromCart(product: Product) {
+    func removeFromCart(product: Product){
         DispatchQueue.main.async {
-            self.cartProducts = self.cartProducts.filter { $0.id != product.id }
+            self.cartProducts = self.cartProducts.filter({$0.id != product.id })
         }
-        cartTotalAmount += (product.price * Double(product.quantity))
+        
+        if cartTotalAmount >= product.price {
+            cartTotalAmount -= product.price
+        }
     }
     
     

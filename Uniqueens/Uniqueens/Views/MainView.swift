@@ -45,9 +45,9 @@ struct MainView: View {
                     .tag(Tab.home)
                 FavoritesView()
                     .tag(Tab.favorites)
-                Text("Profile")
+                SignInView()
                     .tag(Tab.profile)
-                Text("Cart")
+                CartView()
                     .tag(Tab.cart)
             }
             
@@ -58,27 +58,59 @@ struct MainView: View {
                     Button {
                         selectedTab = tab
                     } label: {
-                        VStack{
+                        ZStack(alignment: .topTrailing) {
+                            VStack{
+                                
+                                Image(tab.rawValue)
+                                    .resizable()
+                                    .scaledToFit()
+                                    .frame(width: 25, height: 25)
+                                    .background(
+                                        Color.MyTheme.customGray
+                                            .opacity(0.3)
+                                            .cornerRadius(6)
+                                            .blur(radius: 6)
+                                            .padding(-8)
+                                            .opacity(selectedTab == tab ? 1.0 : 0.0)
+                                    )
+                                
+                                Text(tab.rawValue)
+                                    .font(.caption)
+                                    .foregroundColor(Color.MyTheme.customGray)
+                                    .bold()
+                            }
+                            .padding(.top, 6)
                             
-                            Image(tab.rawValue)
-                                .resizable()
-                                .scaledToFit()
-                                .frame(width: 25, height: 25)
-                                .background(
-                                    Color.MyTheme.customGray
-                                        .opacity(0.3)
-                                        .cornerRadius(6)
-                                        .blur(radius: 6)
-                                        .padding(-8)
-                                        .opacity(selectedTab == tab ? 1.0 : 0.0)
-                                )
+                            if tab == .cart {
+                                if vm.cartProducts.count > 0 {
+                                    ZStack {
+                                        Circle()
+                                            .fill(Color.red)
+                                            .frame(width: 18, height: 18)
+                                            
+                                
+                                        Text("\(vm.totalQuantity)")
+                                            .foregroundColor(.white)
+                                            .font(.caption)
+                                    }
+                                }
+                            }
                             
-                            Text(tab.rawValue)
-                                .font(.caption)
-                                .foregroundColor(Color.MyTheme.customGray)
-                                .bold()
+                            if tab == .favorites {
+                                if vm.favoriteCart.count > 0 {
+                                    ZStack {
+                                        Circle()
+                                            .fill(Color.red)
+                                            .frame(width: 18, height: 18)
+                                            
+                                
+                                        Text("\(vm.favoriteCart.count)")
+                                            .foregroundColor(.white)
+                                            .font(.caption)
+                                    }
+                                }
+                            }
                         }
-                        .padding(.top, 6)
                     }
                     .frame(maxWidth: .infinity)
                 }

@@ -67,9 +67,7 @@ struct ProductView: View {
             VStack(spacing: 2){
             
                 Button {
-                
                     vm.addToCart(product: product)
-                    
                 } label: {
                     
                     VStack {
