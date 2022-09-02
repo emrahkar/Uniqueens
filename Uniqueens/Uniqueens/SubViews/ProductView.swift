@@ -36,6 +36,7 @@ struct ProductView: View {
                                     .foregroundColor(.yellow)
                             } else {
                                 Image(systemName: "star")
+                                    .foregroundColor(Color.MyTheme.customGray)
                             }
                         }
                         .font(.footnote)

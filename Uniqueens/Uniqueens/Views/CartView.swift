@@ -37,6 +37,7 @@ struct CartView: View {
                     
                 }
             }
+            .padding(.top, 60)
             .frame(maxWidth: .infinity, maxHeight: .infinity)
             .background(Color.MyTheme.customLightPink)
         } else {

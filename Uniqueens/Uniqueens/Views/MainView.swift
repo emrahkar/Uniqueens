@@ -20,26 +20,29 @@ struct MainView: View {
        
         VStack(spacing: 0) {
             
-            HStack{
-                Image(systemName: "magnifyingglass")
-                    .font(.title2)
-                    .foregroundColor(Color.MyTheme.customGray)
-                TextField("Search", text: .constant(""))
-                    .disabled(true)
+            if selectedTab == .home {
+                HStack{
+                    Image(systemName: "magnifyingglass")
+                        .font(.title2)
+                        .foregroundColor(Color.MyTheme.customGray)
+                    TextField("Search", text: .constant(""))
+                        .disabled(true)
+                }
+                .padding(.vertical)
+                .padding(.horizontal)
+                .background(
+                        Capsule()
+                            .strokeBorder(Color.MyTheme.customGray, lineWidth: 0.5)
+                
+                )
+                .frame(width: 300, height: 8)
+                .padding(.top, 60)
+                .padding(.bottom, 30)
             }
-            .padding(.vertical)
-            .padding(.horizontal)
-            .background(
-                    Capsule()
-                        .strokeBorder(Color.MyTheme.customGray, lineWidth: 0.5)
-            
-            )
-            .frame(width: 300, height: 12)
-            .padding(.top, 60)
-            .padding(.bottom, 30)
     
             
             TabView(selection: $selectedTab) {
+                
                 
                 HomeView()
                     .tag(Tab.home)

@@ -56,6 +56,7 @@ struct CartListView: View {
                 .font(.caption)
             Button {
                 vm.removeFromCart(product: product)
+                vm.totalQuantity -= quantity
             } label: {
                 Image(systemName: "trash.slash")
                     .font(.caption)
