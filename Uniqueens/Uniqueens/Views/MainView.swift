@@ -9,6 +9,7 @@ import SwiftUI
 
 struct MainView: View {
     
+    @Namespace var animation
     @StateObject var vm: ProductViewModel = ProductViewModel()
     @State var selectedTab: Tab = .home
     
@@ -21,23 +22,24 @@ struct MainView: View {
         VStack(spacing: 0) {
             
             if selectedTab == .home {
-                HStack{
-                    Image(systemName: "magnifyingglass")
-                        .font(.title2)
-                        .foregroundColor(Color.MyTheme.customGray)
-                    TextField("Search", text: .constant(""))
-                        .disabled(true)
+               
+                ZStack{
+                    if vm.searchIsActivated {
+                        SearchBarView(text: .constant(""))
+                    } else {
+                        SearchBarView(text: .constant(""))
+                            .matchedGeometryEffect(id: "SEARCHBAR", in: animation)
+                    }
                 }
-                .padding(.vertical)
-                .padding(.horizontal)
-                .background(
-                        Capsule()
-                            .strokeBorder(Color.MyTheme.customGray, lineWidth: 0.5)
-                
-                )
                 .frame(width: 300, height: 8)
                 .padding(.top, 60)
                 .padding(.bottom, 30)
+                .contentShape(Rectangle())
+                .onTapGesture {
+                    withAnimation (.easeInOut){
+                        vm.searchIsActivated = true
+                    }
+                }
             }
     
             
@@ -124,6 +126,15 @@ struct MainView: View {
         .environmentObject(vm)
         .background(Color.MyTheme.customPink)
         .ignoresSafeArea()
+        .overlay(
+
+            ZStack{
+                if vm.searchIsActivated {
+                    SearchView(animation: animation)
+                        .environmentObject(vm)
+                }
+            }
+        )
     }
 }
 

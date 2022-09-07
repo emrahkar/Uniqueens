@@ -7,6 +7,7 @@
 
 import Foundation
 import SwiftUI
+import Combine
 
 
 
@@ -18,6 +19,11 @@ class ProductViewModel: ObservableObject {
     @Published var cartTotalAmount: Double = 0
     @Published var favoriteCart: [Product] = []
     @Published var totalQuantity: Int = 0
+    
+    @Published var searchText: String = ""
+    @Published var searchIsActivated: Bool = false
+    
+    private var cancellables = Set<AnyCancellable>()
     
     @Published var productList: [Product] = [
     
@@ -64,6 +70,7 @@ class ProductViewModel: ObservableObject {
     
     init() {
         filterProductsByType()
+        addSubscribers()
     }
     
     func filterProductsByType() {
@@ -108,18 +115,47 @@ class ProductViewModel: ObservableObject {
     
     func addToFavorites(product: Product) {
         
-        DispatchQueue.main.async {
+      
             self.favoriteCart.append(product)
-        }
+        
     }
     
     
     func removeFromFavorites(product: Product) {
-        DispatchQueue.main.async {
+        
            
             self.favoriteCart = self.favoriteCart.filter{$0.id != product.id}
-        }
+        
     }
     
-    
+    func addSubscribers() {
+//
+//       $productList
+//            .sink { [weak self] (returnedProducts) in
+//                self?.productList = returnedProducts
+//            }
+//            .store(in: &cancellables)
+        
+        //updated product list
+        $searchText
+            .combineLatest($productList)
+            .map { (text, startingProducts) -> [Product] in
+                
+                guard !text.isEmpty  else {
+                    return startingProducts
+                }
+                
+                let lowercaseText = text.lowercased()
+                
+                return startingProducts.filter { (product) -> Bool in
+                    return product.name.lowercased().contains(lowercaseText) ||
+                    product.id.lowercased().contains(lowercaseText)
+                    
+                }
+            }
+            .sink { [weak self] (returnedProducts) in
+                self?.productList = returnedProducts
+            }
+            .store(in: &cancellables)
+    }
 }
