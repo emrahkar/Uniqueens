@@ -19,6 +19,7 @@ struct SearchBarView: View {
                 .textCase(.lowercase)
                 .disableAutocorrection(true)
                 //.disabled(true)
+                
         }
         .padding(.vertical)
         .padding(.horizontal)

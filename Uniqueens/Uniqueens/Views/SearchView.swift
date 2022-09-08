@@ -20,12 +20,12 @@ struct SearchView: View {
     
     var body: some View {
         
-        VStack(spacing: 0){
+        VStack(spacing: 5){
             
             HStack(spacing: 20) {
                 
                 Button {
-                    
+                    vm.searchIsActivated = false
                 } label: {
                     Image(systemName: "arrow.left")
                         .font(.title2)
@@ -35,10 +35,15 @@ struct SearchView: View {
                 SearchBarView(text: $vm.searchText)
                     .focused($startTF)
                 
+            }
+            .padding(.horizontal)
+            .padding(.top)
+            
+            NavigationView {
                 ScrollView {
                         
                             LazyVGrid(columns: columns, spacing: 10){
-                                ForEach(vm.productList) { product in
+                                ForEach(vm.searchResults) { product in
                                   
                                     NavigationLink {
                                         ProductDetailedView(product: product)
@@ -50,14 +55,7 @@ struct SearchView: View {
                             }
                             .padding(.horizontal, 10)
                 }
-                .background(Color.MyTheme.customLightPink)
-            
             }
-            .padding(.horizontal)
-            .padding(.top)
-            
-            
-            
         }
         .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .top)
         .background(

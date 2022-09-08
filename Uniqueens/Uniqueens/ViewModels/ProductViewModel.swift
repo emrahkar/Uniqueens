@@ -23,6 +23,8 @@ class ProductViewModel: ObservableObject {
     @Published var searchText: String = ""
     @Published var searchIsActivated: Bool = false
     
+    @Published var searchResults: [Product] = []
+    
     private var cancellables = Set<AnyCancellable>()
     
     @Published var productList: [Product] = [
@@ -138,24 +140,33 @@ class ProductViewModel: ObservableObject {
         
         //updated product list
         $searchText
-            .combineLatest($productList)
-            .map { (text, startingProducts) -> [Product] in
-                
-                guard !text.isEmpty  else {
-                    return startingProducts
-                }
-                
-                let lowercaseText = text.lowercased()
-                
-                return startingProducts.filter { (product) -> Bool in
-                    return product.name.lowercased().contains(lowercaseText) ||
-                    product.id.lowercased().contains(lowercaseText)
-                    
+//            .combineLatest($productList)
+//            .map { (text, startingProducts) -> [Product] in
+//
+//                guard !text.isEmpty  else {
+//                    return startingProducts
+//                }
+//
+//                let lowercaseText = text.lowercased()
+//
+//                return startingProducts.filter { (product) -> Bool in
+//                    return product.name.lowercased().contains(lowercaseText) ||
+//                    product.id.lowercased().contains(lowercaseText)
+//
+//                }
+//            }
+//            .sink { [weak self] (returnedProducts) in
+//                self?.productList = returnedProducts
+//            }
+//            .store(in: &cancellables)
+        
+            //.combineLatest($productList)
+            .map { searchText in
+                    let lowercaseText = searchText.lowercased()
+                     return self.productList.filter { product in
+                         product.name.lowercased().contains(lowercaseText) || product.id.lowercased().contains(lowercaseText)
                 }
             }
-            .sink { [weak self] (returnedProducts) in
-                self?.productList = returnedProducts
-            }
-            .store(in: &cancellables)
+            .assign(to: &$searchResults)
     }
 }
