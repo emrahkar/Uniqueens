@@ -2,10 +2,7 @@
 //  ProductViewModel.swift
 //  Uniqueens
 //
-//  Created by Emrah Karabulut on 25.08.2022.
-//
-
-import Foundation
+//  Created by Emrah Karabulut on 25.08.2022
 import SwiftUI
 import Combine
 

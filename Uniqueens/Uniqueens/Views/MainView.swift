@@ -12,6 +12,7 @@ struct MainView: View {
     @Namespace var animation
     @StateObject var vm: ProductViewModel = ProductViewModel()
     @State var selectedTab: Tab = .home
+    @EnvironmentObject var vmLogIn: LoginViewModel
     
     init() {
         UITabBar.appearance().isHidden = true
@@ -50,10 +51,20 @@ struct MainView: View {
                     .tag(Tab.home)
                 FavoritesView()
                     .tag(Tab.favorites)
-                SignInView()
-                    .tag(Tab.profile)
+               
+                if vmLogIn.loggedIn {
+                    HomeView()
+                        .tag(Tab.profile)
+                } else {
+                    SignInView()
+                        .tag(Tab.profile)
+                }
+
                 CartView()
                     .tag(Tab.cart)
+            }
+            .onAppear {
+                vmLogIn.loggedIn = vmLogIn.isLoggedIn
             }
             
             
@@ -141,6 +152,7 @@ struct MainView: View {
 struct MainView_Previews: PreviewProvider {
     static var previews: some View {
         MainView()
+            .environmentObject(LoginViewModel())
     }
 }
 

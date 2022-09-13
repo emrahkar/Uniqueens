@@ -10,6 +10,7 @@ import SwiftUI
 struct HomeView: View {
     
     @EnvironmentObject var vm: ProductViewModel
+    @EnvironmentObject var vmLogIn: LoginViewModel
     
     let columns = [
         GridItem(.adaptive(minimum: 180))
@@ -43,7 +44,27 @@ struct HomeView: View {
                     .frame(width: 400, height: 50)
                     .background(Color.MyTheme.customGray)
             
-            
+            if vmLogIn.loggedIn {
+                HStack {
+                    Spacer()
+                    Button {
+                        vmLogIn.logOut()
+                    } label: {
+                        Text("Log Out")
+                            .font(.caption)
+                            .fontWeight(.heavy)
+                            .frame(width: 100, height: 30)
+                            .foregroundColor(Color.MyTheme.customWhite)
+                            .background(Color.MyTheme.customGray)
+                            .cornerRadius(12)
+                    }
+                    
+                }
+                .padding(.horizontal, 10)
+                .frame(maxWidth: .infinity)
+               
+            }
+
            
             NavigationView {
                 ScrollView {
@@ -77,6 +98,7 @@ struct HomeView_Previews: PreviewProvider {
         
         HomeView()
             .environmentObject(ProductViewModel())
+            .environmentObject(LoginViewModel())
         
     }
 }

@@ -10,8 +10,11 @@ import SwiftUI
 struct SignInView: View {
     
     @State var email: String = ""
-    
+    @State var password: String = ""
+    @State var reEnterPassword: String = ""
     @State var hasAccount: Bool = false
+    
+    @EnvironmentObject var vmLogin: LoginViewModel
     
     var body: some View {
         VStack(alignment: .center){
@@ -27,22 +30,43 @@ struct SignInView: View {
                 .padding(EdgeInsets(top: 0, leading: 6, bottom: 0, trailing: 6))
                 .background(Color.MyTheme.customWhite)
                 .cornerRadius(12)
+                .autocapitalization(.none)
+                .disableAutocorrection(true)
             
-            SecureField("Password", text: $email)
+            SecureField("Password", text: $password)
                 .frame(width: 300, height: 50)
                 .padding(EdgeInsets(top: 0, leading: 6, bottom: 0, trailing: 6))
                 .background(Color.MyTheme.customWhite)
                 .cornerRadius(12)
+                .autocapitalization(.none)
+                .disableAutocorrection(true)
+
             
             if !hasAccount {
-                SecureField("Re-Enter Password", text: $email)
+                SecureField("Re-Enter Password", text: $reEnterPassword)
                     .frame(width: 300, height: 50)
                     .padding(EdgeInsets(top: 0, leading: 6, bottom: 0, trailing: 6))
                     .background(Color.MyTheme.customWhite)
                     .cornerRadius(12)
+                    .autocapitalization(.none)
+                    .disableAutocorrection(true)
+
             }
             
             Button  {
+                
+                guard !email.isEmpty, !password.isEmpty else {
+                    return
+                }
+                
+                if !hasAccount {
+                    
+                    if password == reEnterPassword {
+                        vmLogin.register(email: email, password: password)
+                    }
+                } else {
+                    vmLogin.logIn(email: email, password: password)
+                }
                 
             } label: {
                 Text(hasAccount ? "Log In" : "Register")
@@ -63,12 +87,8 @@ struct SignInView: View {
                         .font(.footnote)
                         .bold()
                         .foregroundColor(Color.MyTheme.customGray)
-                        
                 }
             }
-
-
-            
         }
         .frame(maxWidth: .infinity, maxHeight: .infinity)
         .background(
